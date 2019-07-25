@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-07-22T08:49:18.659Z</updated>
+    <updated>2019-07-25T10:37:45.291Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -19,21 +19,21 @@
         <content type="html"><![CDATA[<pre><code>mysql -h127.0.01 -uroot -p
 mysql --socket=/var/lib/mysql/mysql.sock  -p
 </code></pre>
-<p>TCP连接（Linux，Windows）：
-目标	启动选项	默认值
-SERVER	--port=PORT	3306
+<p>TCP连接（Linux，Windows）：<br>
+目标	启动选项	默认值<br>
+SERVER	--port=PORT	3306<br>
 CLIENT	--protocol=TCP --port=PORT	3306</p>
-<p>SOCKET连接（Linux）：
-目标	启动选项	默认值
-SERVER	--enable-named-pipe --socket=SOCKET	/tmp/mysql.sock
+<p>SOCKET连接（Linux）：<br>
+目标	启动选项	默认值<br>
+SERVER	--enable-named-pipe --socket=SOCKET	/tmp/mysql.sock<br>
 CLIENT	--protocol=SOCKET --socket=SOCKET	/tmp/mysql.sock</p>
-<p>PIPE连接（Windows）：
-目标	启动选项	默认值
-SERVER	--enable-named-pipe --socket=SOCKET	MYSQL
+<p>PIPE连接（Windows）：<br>
+目标	启动选项	默认值<br>
+SERVER	--enable-named-pipe --socket=SOCKET	MYSQL<br>
 CLIENT	--protocol=PIPE --socket=SOCKET	MYSQL</p>
-<p>SHARED MEMORY连接（Windows）：
-目标	启动选项	默认值
-SERVER	--shared-memory --shared-memory-base-name=MEMORY	MySQL
+<p>SHARED MEMORY连接（Windows）：<br>
+目标	启动选项	默认值<br>
+SERVER	--shared-memory --shared-memory-base-name=MEMORY	MySQL<br>
 CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
 ]]></content>
     </entry>
@@ -43,12 +43,12 @@ CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
         <link href="https://lvoooo.github.io/post/su-cha">
         </link>
         <updated>2019-07-08T15:01:12.000Z</updated>
-        <content type="html"><![CDATA[<p>(function() {	
-'use strict';
-// Your code here...
-document.addEventListener(&quot;copy&quot;, function (event) {
-event.stopPropagation();
-}, true);
+        <content type="html"><![CDATA[<p>(function() {	<br>
+'use strict';<br>
+// Your code here...<br>
+document.addEventListener(&quot;copy&quot;, function (event) {<br>
+event.stopPropagation();<br>
+}, true);<br>
 })();</p>
 <h3 id="go-build">Go build</h3>
 <pre><code>1、Mac下编译Linux, Windows平台的64位可执行程序：
@@ -88,6 +88,12 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
 <pre><code># 无权限安装
 --unsafe-perm
 </code></pre>
+<h3 id="redis">Redis</h3>
+<ol>
+<li><a href="https://redis.io/download">Redis官网下载</a></li>
+<li>安装<code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz 			tar xzf redis-5.0.5.tar.gz 			cd redis-5.0.5 			make install</code></li>
+<li></li>
+</ol>
 ]]></content>
     </entry>
     <entry>
