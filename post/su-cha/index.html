@@ -7,7 +7,7 @@
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1564051108049">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1564306032080">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -142,11 +142,50 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
 --unsafe-perm
 </code></pre>
 <h3 id="redis">Redis</h3>
-<ol>
-<li><a href="https://redis.io/download">Redis官网下载</a></li>
-<li>安装<code>wget http://download.redis.io/releases/redis-5.0.5.tar.gz 			tar xzf redis-5.0.5.tar.gz 			cd redis-5.0.5 			make install</code></li>
-<li></li>
-</ol>
+<pre><code>1. [Redis官网下载](https://redis.io/download)
+2. 安装
+
+	wget http://download.redis.io/releases/redis-5.0.5.tar.gz
+	tar xzf redis-5.0.5.tar.gz
+	cd redis-5.0.5
+	make install
+	
+3. systemctl管理Redis启动、停止、开机启动
+
+# 设置systemd管理
+vim /lib/systemd/syste/redis.service
+	 
+		[Unit]
+		Description=Redis
+		After=network.target
+
+		[Service]
+		ExecStart=/usr/local/bin/redis-server /usr/local/redis/redis.conf  --daemonize no
+		ExecStop=/usr/local/bin/redis-cli -h 127.0.0.1 -p 6379 shutdown
+
+		[Install]
+		WantedBy=multi-user.target
+	
+	# 将服务开机启动
+	ln -s /lib/systemd/system/redis.service /etc/systemd/system/multi-user.target.wants/redis.service
+	
+	# 刷新 systemctl
+	systemctl daemon-reload
+	
+	# 启动、重启、停止
+	systemctl start redis
+	systemctl restart redis
+	systemctl stop redis
+	
+	# 开机自启
+	## 设置启用
+	systemctl enable redis
+	## 取消启用
+	systemctl disable redis
+	
+	# 查看状态
+	systemctl status redis
+</code></pre>
 
             </div>
           </article>
@@ -170,7 +209,7 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1564051108049" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1564306032080" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -192,6 +231,18 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
     </div>
     <div class="row">
       <ul>
+        
+          
+            <li>
+              <a href="https://lvoooo.github.io/post/chang-yong-gong-ju">常用工具</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://lvoooo.github.io/post/kuang-jia">框架</a>
+            </li>
+          
         
           
             <li>
@@ -224,7 +275,7 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
           Gridea
         </a>
       

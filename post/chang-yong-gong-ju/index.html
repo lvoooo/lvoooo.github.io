@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Mysql 连接方式以及配置 | lvoooo&#39;s memory</title>
+<title>常用工具 | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -89,36 +89,150 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Mysql 连接方式以及配置</h1>
+            <h1>常用工具</h1>
             <p class="article-meta">
-              2019-07-10
-              
-                <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
-                  mysql
-                </a>
+              2019-07-28
               
             </p>
             
             <div class="post-content">
-              <pre><code>mysql -h127.0.01 -uroot -p
-mysql --socket=/var/lib/mysql/mysql.sock  -p
+              <h3 id="teamviewer">TeamViewer</h3>
+<h4 id="修改id">修改ID</h4>
+<p><a href="https://blog.csdn.net/qq_39729527/article/details/86620987">参考链接</a></p>
+<ol>
+<li>退出TeamView账户，退出TeamView进程</li>
+<li>编写 TeamViewer-id-changer.py</li>
+<li>执行脚本</li>
+<li>重启电脑</li>
+</ol>
+<pre><code>#!/usr/bin/env python 
+#coding:utf-8
+#  python2
+
+import sys
+import os
+import glob
+import platform
+import re
+import random
+import string
+ 
+print('''
+--------------------------------
+TeamViewer ID Changer for MAC OS
+--------------------------------
+''')
+ 
+if platform.system() != 'Darwin':
+    print('This script can be run only on MAC OS.')
+    sys.exit();
+ 
+if os.geteuid() != 0:
+    print('This script must be run form root.')
+    sys.exit();
+ 
+if os.environ.has_key('SUDO_USER'):
+    USERNAME = os.environ['SUDO_USER']
+    if USERNAME == 'root':
+       print('Can not find user name. Run this script via sudo from regular user')
+       sys.exit();
+else:
+    print('Can not find user name. Run this script via sudo from regular user')
+    sys.exit();
+ 
+HOMEDIRLIB = '/Users/' + USERNAME  + '/Library/Preferences/'
+GLOBALLIB  =  '/Library/Preferences/'
+ 
+CONFIGS = []
+ 
+# Find config files
+ 
+def listdir_fullpath(d):
+    return [os.path.join(d, f) for f in os.listdir(d)]
+ 
+for file in listdir_fullpath(HOMEDIRLIB):
+    if 'teamviewer'.lower() in file.lower():
+        CONFIGS.append(file)
+ 
+if not CONFIGS:
+    print ('''
+There is no TemViewer configs found.
+Maybe you have deleted it manualy or never run TeamViewer after installation.
+Nothing to delete.
+''')
+# Delete config files
+else:
+    print(&quot;Configs found:\n&quot;)
+    for file in CONFIGS:
+        print file
+ 
+    print('''
+This files will be DELETED permanently.
+All TeamViewer settings will be lost
+''')
+    raw_input(&quot;Press Enter to continue or CTR+C to abort...&quot;)
+ 
+    for file in CONFIGS:
+        try:
+            os.remove(file)
+        except:
+            print(&quot;Cannot delete config files. Permission denied?&quot;)
+            sys.exit();
+    print(&quot;Done.&quot;)
+ 
+# Find binaryes
+ 
+TMBINARYES = [
+'/Applications/TeamViewer.app/Contents/MacOS/TeamViewer',
+'/Applications/TeamViewer.app/Contents/MacOS/TeamViewer_Service',
+'/Applications/TeamViewer.app/Contents/Helpers/TeamViewer_Desktop',
+]
+ 
+for file in TMBINARYES:
+    if os.path.exists(file):
+        pass
+    else:
+        print(&quot;File not found: &quot; + file)
+        print (&quot;Install TeamViewer correctly&quot;)
+        sys.exit();
+ 
+# Patch files
+ 
+def idpatch(fpath,platf,serial):
+    file = open(fpath, 'r+b')
+    binary = file.read()
+    PlatformPattern = &quot;IOPlatformExpert.{6}&quot;
+    SerialPattern =  &quot;IOPlatformSerialNumber%s%s%sUUID&quot;
+ 
+    binary = re.sub(PlatformPattern, platf, binary)
+    binary = re.sub(SerialPattern % (chr(0), &quot;[0-9a-zA-Z]{8,8}&quot;, chr(0)), SerialPattern%(chr(0), serial, chr(0)), binary)
+ 
+    file = open(fpath,'wb').write(binary)
+    return True
+ 
+def random_generator(size=8, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+ 
+RANDOMSERIAL = random_generator()
+RANDOMPLATFORM = &quot;IOPlatformExpert&quot; + random_generator(6)
+ 
+ 
+for file in TMBINARYES:
+        try:
+            idpatch(file,RANDOMPLATFORM,RANDOMSERIAL)
+        except:
+            print &quot;Error: can not patch file &quot; + file
+            print &quot;Wrong version?&quot;
+            sys.exit();
+ 
+print &quot;PlatformDevice: &quot; + RANDOMPLATFORM
+print &quot;PlatformSerial: &quot; + RANDOMSERIAL
+ 
+print('''
+ID changed sucessfully.
+!!! Restart computer before using TeamViewer !!!!
+''')
 </code></pre>
-<p>TCP连接（Linux，Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--port=PORT	3306<br>
-CLIENT	--protocol=TCP --port=PORT	3306</p>
-<p>SOCKET连接（Linux）：<br>
-目标	启动选项	默认值<br>
-SERVER	--enable-named-pipe --socket=SOCKET	/tmp/mysql.sock<br>
-CLIENT	--protocol=SOCKET --socket=SOCKET	/tmp/mysql.sock</p>
-<p>PIPE连接（Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--enable-named-pipe --socket=SOCKET	MYSQL<br>
-CLIENT	--protocol=PIPE --socket=SOCKET	MYSQL</p>
-<p>SHARED MEMORY连接（Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--shared-memory --shared-memory-base-name=MEMORY	MySQL<br>
-CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
 
             </div>
           </article>
@@ -129,9 +243,9 @@ CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="https://lvoooo.github.io/post/su-cha">
+              <a href="https://lvoooo.github.io/post/kuang-jia">
                 <h3 class="post-title">
-                  速查
+                  框架
                 </h3>
               </a>
             </div>
@@ -204,11 +318,11 @@ CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge warning">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
           Gridea
         </a>
       
