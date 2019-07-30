@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-07-28T09:27:14.113Z</updated>
+    <updated>2019-07-30T08:02:00.573Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -204,7 +204,60 @@ document.addEventListener(&quot;copy&quot;, function (event) {<br>
 event.stopPropagation();<br>
 }, true);<br>
 })();</p>
-<h3 id="go-build">Go build</h3>
+<h3 id="golang">Golang</h3>
+<h4 id="golangx-问题">golang/x 问题</h4>
+<pre><code>//*[@id=&quot;org-repositories&quot;]//h3/a/@href
+</code></pre>
+<pre><code>git clone https://github.com/golang/website
+git clone https://github.com/golang/proposal
+git clone https://github.com/golang/go
+git clone https://github.com/golang/image
+git clone https://github.com/golang/build
+git clone https://github.com/golang/protobuf
+git clone https://github.com/golang/tools
+git clone https://github.com/golang/net
+git clone https://github.com/golang/sys
+git clone https://github.com/golang/lint
+git clone https://github.com/golang/gofrontend
+git clone https://github.com/golang/gddo
+git clone https://github.com/golang/sync
+git clone https://github.com/golang/glog
+git clone https://github.com/golang/mobile
+git clone https://github.com/golang/mock
+git clone https://github.com/golang/example
+git clone https://github.com/golang/exp
+git clone https://github.com/golang/blog
+git clone https://github.com/golang/oauth2
+git clone https://github.com/golang/xerrors
+git clone https://github.com/golang/debug
+git clone https://github.com/golang/crypto
+git clone https://github.com/golang/groupcache
+git clone https://github.com/golang/playground
+git clone https://github.com/golang/snappy
+git clone https://github.com/golang/dl
+git clone https://github.com/golang/talks
+git clone https://github.com/golang/dep
+git clone https://github.com/golang/perf
+git clone https://github.com/golang/tour
+git clone https://github.com/golang/appengine
+git clone https://github.com/golang/mod
+git clone https://github.com/golang/vgo
+git clone https://github.com/golang/review
+git clone https://github.com/golang/geo
+git clone https://github.com/golang/text
+git clone https://github.com/golang/benchmarks
+git clone https://github.com/golang/term
+git clone https://github.com/golang/arch
+git clone https://github.com/golang/time
+git clone https://github.com/golang/freetype
+git clone https://github.com/golang/scratch
+git clone https://github.com/golang/cwg
+git clone https://github.com/golang/sublime-build
+git clone https://github.com/golang/winstrap
+git clone https://github.com/golang/leveldb
+git clone https://github.com/golang/sublime-config
+</code></pre>
+<h4 id="go-build">Go build</h4>
 <pre><code>1、Mac下编译Linux, Windows平台的64位可执行程序：
 
 $ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build test.go
@@ -240,7 +293,51 @@ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
 </code></pre>
 <h3 id="node">Node</h3>
 <pre><code># 无权限安装
---unsafe-perm
+https://www.kancloud.cn/shellway/npm-doc/199985
+https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+
+npm install xxx --unsafe-perm
+
+# 查看 npm 目录路径
+npm config get prefix
+# 修改
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+# 编辑 ~/.profile
+export PATH=~/.npm-global/bin:$PATH
+source ~/.profile
+
+# pm2
+https://www.kancloud.cn/daiji/pm2/395363
+
+npm install pm2 -g
+pm2 start app.js
+pm2 update/list/stop/restart/delete
+# 生成进程文件
+pm2 ecosystem
+pm2 start/stop/restart/reload/delete  ecosystem.config.js
+</code></pre>
+<pre><code>module.exports = {
+  apps : [{
+    name: 'tx_app',
+    script: './bin/www',
+
+    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    args: 'one two',
+    instances: 4,
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '2G',
+    env: {
+      NODE_ENV: 'development',
+      PORT: 9000
+    },
+    env_production: {
+      NODE_ENV: 'production',
+      PORT: 9000
+    }
+  }]
+};
 </code></pre>
 <h3 id="redis">Redis</h3>
 <pre><code>1. [Redis官网下载](https://redis.io/download)
