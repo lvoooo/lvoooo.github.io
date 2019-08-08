@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-07-30T08:02:00.573Z</updated>
+    <updated>2019-08-08T07:32:31.256Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -256,6 +256,26 @@ git clone https://github.com/golang/sublime-build
 git clone https://github.com/golang/winstrap
 git clone https://github.com/golang/leveldb
 git clone https://github.com/golang/sublime-config
+</code></pre>
+<h4 id="go-mod">Go mod</h4>
+<pre><code>export GO111MODULE=on
+export GOPROXY=https://goproxy.io
+
+</code></pre>
+<h4 id="go-fabric-sdk-go">Go fabric-sdk-go</h4>
+<pre><code>require (
+    github.com/cloudflare/cfssl v0.0.0-20190409034051-768cd563887f // indirect
+    github.com/go-kit/kit v0.8.0 // indirect
+    github.com/go-logfmt/logfmt v0.4.0 // indirect
+    github.com/golang/mock v1.3.0 // indirect
+    github.com/google/certificate-transparency-go v1.0.21 // indirect
+    github.com/hyperledger/fabric-lib-go v1.0.0 // indirect
+    github.com/hyperledger/fabric-sdk-go v1.0.0-alpha5
+    github.com/pkg/errors v0.8.1 // indirect
+    github.com/prometheus/client_golang v0.9.2 // indirect
+    github.com/spf13/viper v1.3.2 // indirect
+    google.golang.org/grpc v1.20.1 // indirect
+)
 </code></pre>
 <h4 id="go-build">Go build</h4>
 <pre><code>1、Mac下编译Linux, Windows平台的64位可执行程序：
