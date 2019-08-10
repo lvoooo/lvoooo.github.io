@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Gridea | lvoooo&#39;s memory</title>
+<title>NAT相关 | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://lvoooo.github.io">lvoooo&#39;s memory</a></h3>
@@ -87,42 +88,54 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Gridea</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://lvoooo.github.io/post/hello-gridea">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+          <article class="article">
+            <h1>NAT相关</h1>
+            <p class="article-meta">
+              2019-08-10
+              
+                <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
+                  network
+                </a>
+              
+                <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge success">
+                  NAT
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>类型（A-B）	建立状况<br>
+完全锥型-完全锥型	A通过server获得B的IP:port开始通信<br>
+完全锥型-IP限制型	B通过server获得A的IP:port开始通信<br>
+完全锥型-port限制型	B通过server获得A的IP:port开始通信<br>
+完全锥型-对称型	B通过server获得A的IP:port开始通信<br>
+IP限制型-IP限制型	A通过server获得B的IP:port，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，二者之后就可以开始通信。<br>
+IP限制型-port限制型	A通过server获得B的IP:port，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，二者之后就可以开始通信。<br>
+IP限制型-对称型	A通过server获得B的IP:port1，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，A收到B的UDP包，获得B新的IP:port2；A向B的新地址IP:port2发送数据，可以开始通信。<br>
+port限制型-对称型	A通过server获得B的IP:port1，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，但由于B更换了新端口port2，A刚建立的映射无法使用，A故此无法收到B为A通信使用的新端口，无法建立NAT映射，两者无法互通。<br>
+对称型-对称型	同上，对称型开启新端口对方无法获悉，无法建立链接。<br>
+无法P2P就需要用TURN服务器转发数据了…</p>
 
-    </p>
-    <div class="row">
-      <a href="https://lvoooo.github.io/post/hello-gridea" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://lvoooo.github.io/post/chang-yong-gong-ju">
+                <h3 class="post-title">
+                  常用工具
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://lvoooo.github.io/images/avatar.png?v=1565432037349" class="no-responsive avatar">
@@ -193,15 +206,15 @@
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge success">
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge ">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
           mysql
         </a>
       
@@ -215,6 +228,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lvoooo.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 

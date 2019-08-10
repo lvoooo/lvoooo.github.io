@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-08-08T07:32:31.256Z</updated>
+    <updated>2019-08-10T10:14:00.349Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -10,6 +10,25 @@
     <logo>https://lvoooo.github.io/images/avatar.png</logo>
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
+    <entry>
+        <title type="html"><![CDATA[NAT相关]]></title>
+        <id>https://lvoooo.github.io/post/nat-xiang-guan</id>
+        <link href="https://lvoooo.github.io/post/nat-xiang-guan">
+        </link>
+        <updated>2019-08-10T10:12:27.000Z</updated>
+        <content type="html"><![CDATA[<p>类型（A-B）	建立状况<br>
+完全锥型-完全锥型	A通过server获得B的IP:port开始通信<br>
+完全锥型-IP限制型	B通过server获得A的IP:port开始通信<br>
+完全锥型-port限制型	B通过server获得A的IP:port开始通信<br>
+完全锥型-对称型	B通过server获得A的IP:port开始通信<br>
+IP限制型-IP限制型	A通过server获得B的IP:port，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，二者之后就可以开始通信。<br>
+IP限制型-port限制型	A通过server获得B的IP:port，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，二者之后就可以开始通信。<br>
+IP限制型-对称型	A通过server获得B的IP:port1，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，A收到B的UDP包，获得B新的IP:port2；A向B的新地址IP:port2发送数据，可以开始通信。<br>
+port限制型-对称型	A通过server获得B的IP:port1，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，但由于B更换了新端口port2，A刚建立的映射无法使用，A故此无法收到B为A通信使用的新端口，无法建立NAT映射，两者无法互通。<br>
+对称型-对称型	同上，对称型开启新端口对方无法获悉，无法建立链接。<br>
+无法P2P就需要用TURN服务器转发数据了…</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[常用工具]]></title>
         <id>https://lvoooo.github.io/post/chang-yong-gong-ju</id>
