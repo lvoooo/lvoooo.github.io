@@ -7,7 +7,7 @@
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1566490655633">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1566659748952">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -103,6 +103,37 @@ document.addEventListener(&quot;copy&quot;, function (event) {<br>
 event.stopPropagation();<br>
 }, true);<br>
 })();</p>
+<h3 id="docker">docker</h3>
+<h4 id="不加-sudo-执行-docker-命令">不加 sudo 执行 Docker 命令</h4>
+<p>查看连接文件权限</p>
+<pre><code>sudo ls -l /var/run/docker.sock
+srw-rw---- 1 root docker 0 1月  13 13:26 /var/run/docker.sock
+</code></pre>
+<p>需要</p>
+<ol>
+<li>使用 root 权限（切到 root，或 sudo 运行）</li>
+<li>使用 docker 用户组权限（添加当前用户到 docker 用户组）</li>
+<li>修改这个 Socket 文件的权限设置（chmod o+rw）<br>
+将当前用户添加进docker用户组</li>
+</ol>
+<pre><code>cat /etc/group | grep docker # 查找 docker 组，确认其是否存在
+groups # 列出自己的用户组，确认自己在不在 docker 组中
+
+# 如果 docker 组不存在，则添加之：
+sudo groupadd docker
+
+# 将当前用户添加到 docker 组
+sudo gpasswd -a ${USER} docker
+
+# 重启服务
+sudo service docker restart
+
+# 切换一下用户组（刷新缓存）
+newgrp - docker;
+newgrp - `groups ${USER} | cut -d' ' -f1`; # TODO：必须逐行执行，不知道为什么，批量执行时第二条不会生效
+# 或者，注销并重新登录
+pkill X
+</code></pre>
 <h3 id="golang">Golang</h3>
 <h4 id="golangx-问题">golang/x 问题</h4>
 <pre><code>//*[@id=&quot;org-repositories&quot;]//h3/a/@href
@@ -340,7 +371,7 @@ bin/kafka-topics.sh --bootstrap-server broker_host:port --describe --topic &lt;t
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1566490655633" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1566659748952" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -414,11 +445,11 @@ bin/kafka-topics.sh --bootstrap-server broker_host:port --describe --topic &lt;t
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
           network
         </a>
       
@@ -426,11 +457,11 @@ bin/kafka-topics.sh --bootstrap-server broker_host:port --describe --topic &lt;t
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge success">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
           Gridea
         </a>
       
