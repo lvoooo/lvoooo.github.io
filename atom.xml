@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-08-26T06:04:38.052Z</updated>
+    <updated>2019-08-27T07:47:39.708Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -10,6 +10,29 @@
     <logo>https://lvoooo.github.io/images/avatar.png</logo>
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
+    <entry>
+        <title type="html"><![CDATA[Linux 命令]]></title>
+        <id>https://lvoooo.github.io/post/linux-ming-ling</id>
+        <link href="https://lvoooo.github.io/post/linux-ming-ling">
+        </link>
+        <updated>2019-08-27T07:37:04.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="压缩">压缩</h3>
+<pre><code class="language-shell">xz -d ***.tar.xz
+tar -xvf  ***.tar
+</code></pre>
+<h3 id="用户">用户</h3>
+<pre><code class="language-text">#添加用户到sudoer列表中
+root 账户键入visudo
+实际上是在修改 /etc/sudoers
+在 root ALL=(ALL) ALL
+这一行，
+
+修改：
+username  ALL=(ALL)      ALL
+username  ALL=(ALL)       NOPASSWD:ALL
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Fabric CA]]></title>
         <id>https://lvoooo.github.io/post/fabric-ca</id>
@@ -250,266 +273,6 @@ CLIENT	--protocol=PIPE --socket=SOCKET	MYSQL</p>
 目标	启动选项	默认值<br>
 SERVER	--shared-memory --shared-memory-base-name=MEMORY	MySQL<br>
 CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[速查]]></title>
-        <id>https://lvoooo.github.io/post/su-cha</id>
-        <link href="https://lvoooo.github.io/post/su-cha">
-        </link>
-        <updated>2019-07-08T15:01:12.000Z</updated>
-        <content type="html"><![CDATA[<p>(function() {	<br>
-'use strict';<br>
-// Your code here...<br>
-document.addEventListener(&quot;copy&quot;, function (event) {<br>
-event.stopPropagation();<br>
-}, true);<br>
-})();</p>
-<h3 id="docker">docker</h3>
-<h4 id="不加-sudo-执行-docker-命令">不加 sudo 执行 Docker 命令</h4>
-<p>查看连接文件权限</p>
-<pre><code>sudo ls -l /var/run/docker.sock
-srw-rw---- 1 root docker 0 1月  13 13:26 /var/run/docker.sock
-</code></pre>
-<p>需要</p>
-<ol>
-<li>使用 root 权限（切到 root，或 sudo 运行）</li>
-<li>使用 docker 用户组权限（添加当前用户到 docker 用户组）</li>
-<li>修改这个 Socket 文件的权限设置（chmod o+rw）<br>
-将当前用户添加进docker用户组</li>
-</ol>
-<pre><code>cat /etc/group | grep docker # 查找 docker 组，确认其是否存在
-groups # 列出自己的用户组，确认自己在不在 docker 组中
-
-# 如果 docker 组不存在，则添加之：
-sudo groupadd docker
-
-# 将当前用户添加到 docker 组
-sudo gpasswd -a ${USER} docker
-
-# 重启服务
-sudo service docker restart
-
-# 切换一下用户组（刷新缓存）
-newgrp - docker;
-newgrp - `groups ${USER} | cut -d' ' -f1`; # TODO：必须逐行执行，不知道为什么，批量执行时第二条不会生效
-# 或者，注销并重新登录
-pkill X
-</code></pre>
-<h3 id="golang">Golang</h3>
-<h4 id="golangx-问题">golang/x 问题</h4>
-<pre><code>//*[@id=&quot;org-repositories&quot;]//h3/a/@href
-</code></pre>
-<pre><code>git clone https://github.com/golang/website
-git clone https://github.com/golang/proposal
-git clone https://github.com/golang/go
-git clone https://github.com/golang/image
-git clone https://github.com/golang/build
-git clone https://github.com/golang/protobuf
-git clone https://github.com/golang/tools
-git clone https://github.com/golang/net
-git clone https://github.com/golang/sys
-git clone https://github.com/golang/lint
-git clone https://github.com/golang/gofrontend
-git clone https://github.com/golang/gddo
-git clone https://github.com/golang/sync
-git clone https://github.com/golang/glog
-git clone https://github.com/golang/mobile
-git clone https://github.com/golang/mock
-git clone https://github.com/golang/example
-git clone https://github.com/golang/exp
-git clone https://github.com/golang/blog
-git clone https://github.com/golang/oauth2
-git clone https://github.com/golang/xerrors
-git clone https://github.com/golang/debug
-git clone https://github.com/golang/crypto
-git clone https://github.com/golang/groupcache
-git clone https://github.com/golang/playground
-git clone https://github.com/golang/snappy
-git clone https://github.com/golang/dl
-git clone https://github.com/golang/talks
-git clone https://github.com/golang/dep
-git clone https://github.com/golang/perf
-git clone https://github.com/golang/tour
-git clone https://github.com/golang/appengine
-git clone https://github.com/golang/mod
-git clone https://github.com/golang/vgo
-git clone https://github.com/golang/review
-git clone https://github.com/golang/geo
-git clone https://github.com/golang/text
-git clone https://github.com/golang/benchmarks
-git clone https://github.com/golang/term
-git clone https://github.com/golang/arch
-git clone https://github.com/golang/time
-git clone https://github.com/golang/freetype
-git clone https://github.com/golang/scratch
-git clone https://github.com/golang/cwg
-git clone https://github.com/golang/sublime-build
-git clone https://github.com/golang/winstrap
-git clone https://github.com/golang/leveldb
-git clone https://github.com/golang/sublime-config
-</code></pre>
-<h4 id="go-mod">Go mod</h4>
-<pre><code>export GO111MODULE=on
-镜像源
-export GOPROXY=https://goproxy.io
-export GOPROXY=http://mirrors.aliyun.com/goproxy/
-
-$env GO111MODULE = &quot;auto&quot;
-$env GOPROXY = &quot;&quot; 
-</code></pre>
-<h4 id="go-fabric-sdk-go">Go fabric-sdk-go</h4>
-<pre><code>require (
-    github.com/cloudflare/cfssl v0.0.0-20190409034051-768cd563887f // indirect
-    github.com/go-kit/kit v0.8.0 // indirect
-    github.com/go-logfmt/logfmt v0.4.0 // indirect
-    github.com/golang/mock v1.3.0 // indirect
-    github.com/google/certificate-transparency-go v1.0.21 // indirect
-    github.com/hyperledger/fabric-lib-go v1.0.0 // indirect
-    github.com/hyperledger/fabric-sdk-go v1.0.0-alpha5
-    github.com/pkg/errors v0.8.1 // indirect
-    github.com/prometheus/client_golang v0.9.2 // indirect
-    github.com/spf13/viper v1.3.2 // indirect
-    google.golang.org/grpc v1.20.1 // indirect
-)
-</code></pre>
-<h4 id="go-build">Go build</h4>
-<pre><code>1、Mac下编译Linux, Windows平台的64位可执行程序：
-
-$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build test.go
-
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go
-
-
-2、Linux下编译Mac, Windows平台的64位可执行程序：
-
-$ CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build test.go
-
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go
-
-
-
-3、Windows下编译Mac, Linux平台的64位可执行程序：
-
-$ SET CGO_ENABLED=0SET GOOS=darwin3 SET GOARCH=amd64 go build test.go
-
-$ SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64 go build test.go
-
-注：如果编译web等工程项目，直接cd到工程目录下直接执行以上命令
-
-GOOS：目标可执行程序运行操作系统，支持 darwin，freebsd，linux，windows
-
-GOARCH：目标可执行程序操作系统构架，包括 386，amd64，arm
-
-Golang version 1.5以前版本在首次交叉编译时还需要配置交叉编译环境：
-
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
-
-CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
-</code></pre>
-<h3 id="node">Node</h3>
-<pre><code># 无权限安装
-https://www.kancloud.cn/shellway/npm-doc/199985
-https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
-
-npm install xxx --unsafe-perm
-
-# 查看 npm 目录路径
-npm config get prefix
-# 修改
-mkdir ~/.npm-global
-npm config set prefix '~/.npm-global'
-# 编辑 ~/.profile
-export PATH=~/.npm-global/bin:$PATH
-source ~/.profile
-
-# pm2
-https://www.kancloud.cn/daiji/pm2/395363
-
-npm install pm2 -g
-pm2 start app.js
-pm2 update/list/stop/restart/delete
-# 生成进程文件
-pm2 ecosystem
-pm2 start/stop/restart/reload/delete  ecosystem.config.js
-</code></pre>
-<pre><code>module.exports = {
-  apps : [{
-    name: 'tx_app',
-    script: './bin/www',
-
-    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-    args: 'one two',
-    instances: 4,
-    autorestart: true,
-    watch: false,
-    max_memory_restart: '2G',
-    env: {
-      NODE_ENV: 'development',
-      PORT: 9000
-    },
-    env_production: {
-      NODE_ENV: 'production',
-      PORT: 9000
-    }
-  }]
-};
-</code></pre>
-<h3 id="redis">Redis</h3>
-<pre><code>1. [Redis官网下载](https://redis.io/download)
-2. 安装
-
-	wget http://download.redis.io/releases/redis-5.0.5.tar.gz
-	tar xzf redis-5.0.5.tar.gz
-	cd redis-5.0.5
-	make install
-	
-3. systemctl管理Redis启动、停止、开机启动
-
-# 设置systemd管理
-vim /lib/systemd/syste/redis.service
-	 
-		[Unit]
-		Description=Redis
-		After=network.target
-
-		[Service]
-		ExecStart=/usr/local/bin/redis-server /usr/local/redis/redis.conf  --daemonize no
-		ExecStop=/usr/local/bin/redis-cli -h 127.0.0.1 -p 6379 shutdown
-
-		[Install]
-		WantedBy=multi-user.target
-	
-	# 将服务开机启动
-	ln -s /lib/systemd/system/redis.service /etc/systemd/system/multi-user.target.wants/redis.service
-	
-	# 刷新 systemctl
-	systemctl daemon-reload
-	
-	# 启动、重启、停止
-	systemctl start redis
-	systemctl restart redis
-	systemctl stop redis
-	
-	# 开机自启
-	## 设置启用
-	systemctl enable redis
-	## 取消启用
-	systemctl disable redis
-	
-	# 查看状态
-	systemctl status redis
-</code></pre>
-<h3 id="kafka">Kafka</h3>
-<pre><code class="language-shell">bin/kafka-consumer-groups.sh --bootstrap-server Broker主机名:端口 --describe --group &lt;group 名称 &gt;
-
-bin/kafka-topics.sh --bootstrap-server broker_host:port --create --topic my_topic_name  --partitions 1 --replication-factor 1
-
-bin/kafka-topics.sh --bootstrap-server broker_host:port --list
-
-bin/kafka-topics.sh --bootstrap-server broker_host:port --describe --topic &lt;topic_name&gt;
-
-</code></pre>
 ]]></content>
     </entry>
     <entry>

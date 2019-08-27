@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>mysql | lvoooo&#39;s memory</title>
+<title>Linux 命令 | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://lvoooo.github.io">lvoooo&#39;s memory</a></h3>
@@ -87,40 +88,50 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: mysql</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi">Mysql 连接方式以及配置</a>
-    </h2>
-    <p class="article-meta">
-      2019-07-10
-      
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge success">
-          mysql
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>Linux 命令</h1>
+            <p class="article-meta">
+              2019-08-27
+              
+            </p>
+            
+            <div class="post-content">
+              <h3 id="压缩">压缩</h3>
+<pre><code class="language-shell">xz -d ***.tar.xz
+tar -xvf  ***.tar
+</code></pre>
+<h3 id="用户">用户</h3>
+<pre><code class="language-text">#添加用户到sudoer列表中
+root 账户键入visudo
+实际上是在修改 /etc/sudoers
+在 root ALL=(ALL) ALL
+这一行，
 
+修改：
+username  ALL=(ALL)      ALL
+username  ALL=(ALL)       NOPASSWD:ALL
+</code></pre>
 
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://lvoooo.github.io/post/fabric-ca">
+                <h3 class="post-title">
+                  Fabric CA
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://lvoooo.github.io/images/avatar.png?v=1566892056692" class="no-responsive avatar">
@@ -197,11 +208,11 @@
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge ">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
           network
         </a>
       
@@ -213,7 +224,7 @@
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
           Gridea
         </a>
       
@@ -223,6 +234,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lvoooo.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
