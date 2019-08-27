@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>network | lvoooo&#39;s memory</title>
+<title>Go Profile | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://lvoooo.github.io">lvoooo&#39;s memory</a></h3>
@@ -87,44 +88,117 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: network</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://lvoooo.github.io/post/nat-xiang-guan">NAT相关</a>
-    </h2>
-    <p class="article-meta">
-      2019-08-10
-      
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
-          network
-        </a>
-      
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge ">
-          NAT
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://lvoooo.github.io/post/nat-xiang-guan" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>Go Profile</h1>
+            <p class="article-meta">
+              2019-08-27
+              
+                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
+                  Go
+                </a>
+              
+                <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge warning">
+                  性能分析
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>参考:<br>
+https://blog.csdn.net/get_set/article/details/81229629</p>
+<h3 id="benchmark">benchmark</h3>
+<h4 id="benchmark测试有如下约定">benchmark测试有如下约定：</h4>
+<ul>
+<li>benchmark也是测试，因此也是以_test.go结尾的文件；</li>
+<li>需要import testing；</li>
+<li>测试方法以Benchmark开始，并且拥有一个*testing.B参数。</li>
+</ul>
+<pre><code>package main
 
+import &quot;testing&quot;
+import &quot;strings&quot;
 
+func BenchmarkStringJoin1(b *testing.B) {
+    input := []string{&quot;Hello&quot;, &quot;World&quot;}
+    for i := 0; i &lt; b.N; i++ {
+        result := strings.Join(input, &quot; &quot;)
+        if result != &quot;Hello World&quot; {
+            b.Error(&quot;Unexpected result: &quot; + result)
+        }
+    }
+}
+</code></pre>
+<h4 id="相关命令">相关命令</h4>
+<ol>
+<li>go test -bench=. -run=NONE</li>
+</ol>
+<ul>
+<li>-bench可以根据正则表达式筛选要测试的方法，这里的.表示匹配所有的测试方</li>
+<li>-run=NONE表示忽略功能测试。</li>
+</ul>
+<p>输出</p>
+<pre><code>goos: linux
+goarch: amd64
+pkg: hello/bench_test
+BenchmarkStringJoin1-8      50000000            36.6 ns/op
+PASS
+ok      hello/bench_test    1.871s
+
+</code></pre>
+<ul>
+<li>BenchmarkStringJoin1-8表示测试了哪个方法，8标识GOMAXPROCS的值，通常等于CPU物理线程数；</li>
+<li>50000000即进行了50000000次测试，基准测试运行器开始并不知道这个操作耗时长短，所以开始的时候它使用一个比较小的N值，然后根据运行情况推算出合适的N值；</li>
+<li>36.6 ns/op表示每个操作耗时36.6纳秒。</li>
+</ul>
+<ol start="2">
+<li>go test -bench=. -benchmem</li>
+</ol>
+<pre><code>$ go test -bench=. -benchmem
+goos: linux
+goarch: amd64
+pkg: hello/bench_test
+BenchmarkStringJoin1-8      30000000            37.2 ns/op        16 B/op          1 allocs/op
+PASS
+ok      hello/bench_test    1.159s
+</code></pre>
+<ul>
+<li>16 B/op表示每次操作需要16字节的内存；</li>
+<li>1 allocs/op表示每次操作会进行一次内存分配。</li>
+</ul>
+<h3 id="profiling">profiling</h3>
+<p>Go通过对执行过程进行采样，来获取profiling数据。具体来说支持如下几种性能指标：</p>
+<ul>
+<li>CPU profiling：用于识别出执行过程中需要CPU最多的函数。在每个CPU上面执行的线程每个几毫秒进行定期的中断，并在每次中断过程中记录一个性能剖析事件，然后恢复执行。</li>
+<li>heap profiling：用于识别出负责分配最多内存的语句。</li>
+<li>block profiling：用于识别出阻塞协程最久的操作，比如系统调用、通道发送、接收数据和获取锁等，性能分析库会在goroutine被这些操作阻塞的时候记录一个事件。</li>
+</ul>
+<ol>
+<li>go test -bench . -cpuprofile=cpu.out -blockprofile=block.out -memprofile=mem.out</li>
+<li>go tool pprof -text ./bench_test.test cpu.out</li>
+<li>输出图片 go tool pprof -svg ./bench_test.test cpu.out &gt; cpu.svg</li>
+<li>生成火焰图 go-torch -b cpu.out -f cpu.torch.svg</li>
+</ol>
+
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://lvoooo.github.io/post/linux-ming-ling">
+                <h3 class="post-title">
+                  Linux 命令
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://lvoooo.github.io/images/avatar.png?v=1566899134125" class="no-responsive avatar">
@@ -213,23 +287,23 @@
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge success">
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge ">
           Go
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge ">
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge ">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge warning">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge secondary">
           NAT
         </a>
       
@@ -237,7 +311,7 @@
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
           Gridea
         </a>
       
@@ -247,6 +321,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lvoooo.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
