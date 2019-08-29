@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>excute | lvoooo&#39;s memory</title>
+<title>Go database/sql的连接池 | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -89,37 +89,179 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>excute</h1>
+            <h1>Go database/sql的连接池</h1>
             <p class="article-meta">
-              2019-06-24
+              2019-08-29
               
-                <a href="https://lvoooo.github.io/tag/RBZiA9XKq" class="badge secondary">
-                  read it later
+                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
+                  Go
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>READ<br>
-<a href="https://tiku.jiajunhuang.com/">interview</a></p>
-<p>ARTS<br>
-<a href="https://codenow.me/">ARTS</a></p>
-<p>Rust<br>
-<a href="https://github.com/aylei/leetcode-rust/tree/master/src">leetcode-rust</a><br>
-<a href="https://rustlang-cn.org/">rustlang-cn</a></p>
-<p>Algo<br>
-<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">visualization</a><br>
-<a href="https://github.com/wangzheng0822/algo">wangzheng0822</a></p>
-<p>https://www.v2ex.com/t/575373</p>
-<p>https://mllz.com/</p>
-<p>https://www.acwing.com</p>
-<p>https://xiaozhuanlan.com/explore</p>
-<p>https://liyangzone.com/</p>
+              <h3 id="步骤">步骤</h3>
+<pre><code>1. 注册驱动
+2. 初始化DB
+3. 获取连接
+4. 释放连接
+sql.go(Query()) -&gt; sql.go(QueryContext()) -&gt; sql.go(query()) -&gt; sql.go(conn())
+conn()
+如果连接池中有空闲的连接且没有过期的就直接拿出来用；
+如果当前实际连接数已经超过最大连接数即上面case中提到的maxOpenConns，则将任务添加到任务队列中等待；
+以上情况都不满足，则自行创建一个新的连接用于执行DB操作。
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gk9qhhkmj30xm0oj41b.jpg" alt="database/sql"></p>
+<h3 id="案例">案例</h3>
+<pre><code>package main
+
+import (
+	db &quot;database/sql&quot;
+	&quot;fmt&quot;
+	//_ &quot;github.com/jinzhu/gorm/dialects/mysql&quot;
+	_ &quot;github.com/go-sql-driver/mysql&quot; //驱动注册
+)
+
+// 最大连接数为10，两个查询可以分别创建两个连接执行
+func fewConns(){
+	db, _ := db.Open(&quot;mysql&quot;, &quot;root:123456@tcp(127.0.0.1:3306)/giligili?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+	db.SetMaxOpenConns(10)
+	rows, err := db.Query(&quot;select * from videos where title = 'ed' limit 10&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		fmt.Println(&quot;query error&quot;)
+	}
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	row, _ := db.Query(&quot;select * from videos&quot;)
+	fmt.Println(row, rows)
+
+}
+
+// 只有一个连接，被占用后没有被释放，会导致阻塞
+func oneConn() {
+	db, _ := db.Open(&quot;mysql&quot;, &quot;root:123456@tcp(127.0.0.1:3306)/giligili?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+
+	db.SetMaxOpenConns(1)
+	rows, err := db.Query(&quot;select * from videos where title = 'ed' limit 10&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		fmt.Println(&quot;query error&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	// 拿不到连接，可用的连接一直被上一次查询占用了。
+	// 会阻塞连接
+	row, _ := db.Query(&quot;select * from videos&quot;)
+	fmt.Println(row, rows)
+}
+
+// 只有一个连接，调用了rows遍历代码，最后一次的时候会rows.Close() 释放连接
+func oneConnWithRowsNext() {
+	db, _ := db.Open(&quot;mysql&quot;, &quot;root:123456@tcp(127.0.0.1:3306)/giligili?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+
+	db.SetMaxOpenConns(1)
+	rows, err := db.Query(&quot;select * from videos where title = 'ed' limit 10&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		fmt.Println(&quot;query error&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	// 这里可以让下一次sql拿到链接
+	for rows.Next() {
+		fmt.Println(&quot;close&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	row, _ := db.Query(&quot;select * from videos&quot;)
+	fmt.Println(row, rows)
+}
+
+// 最大1个连接，使用了rows遍历，但是没有释放连接
+func oneConnWithRowsNextWithError() {
+	db, _ := db.Open(&quot;mysql&quot;, &quot;root:123456@tcp(127.0.0.1:3306)/giligili?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+
+	db.SetMaxOpenConns(1)
+	rows, err := db.Query(&quot;select * from videos where title = 'ed' limit 10&quot;)
+	if err != nil {
+		fmt.Println(&quot;query error&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	// rows遍历的提前结束，会影响了后面查询
+	i := 1
+	for rows.Next() {
+		i++
+		if i == 3 {
+			break
+		}
+		fmt.Println(&quot;close&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	row, _ := db.Query(&quot;select * from test&quot;)
+	fmt.Println(row, rows)
+}
+
+// 最大1个连接，使用rows遍历，即使中途退出，但最后调用了rows.Close() 关闭，释放连接。
+func oneConnWithRowsNextWithErrorWithRowsClose() {
+	db, _ := db.Open(&quot;mysql&quot;, &quot;root:123456@tcp(127.0.0.1:3306)/giligili?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+
+	db.SetMaxOpenConns(1)
+	rows, err := db.Query(&quot;select * from videos where title = 'ed' limit 10&quot;)
+	if err != nil {
+		fmt.Println(&quot;query error&quot;)
+	}
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	// 调用了关闭rows的语句，继续执行第二次查询。
+	i := 1
+	for rows.Next() {
+		i++
+		if i == 3 {
+			break
+		}
+		fmt.Println(&quot;close&quot;)
+	}
+	rows.Close()
+
+
+	fmt.Println(&quot;-----------------------------------------&quot;)
+	row, _ := db.Query(&quot;select * from videos&quot;)
+	fmt.Println(row, rows)
+}
+
+
+func main()  {
+	// maxConn &gt; 1
+	fewConns()
+	// maxConn = 1
+	oneConn()
+
+	// maxConn = 1 + for rows.Next()
+	oneConnWithRowsNext()
+	// maxConn = 1 + for rows.Next() + 提前退出
+	oneConnWithRowsNextWithError()
+	// maxConn = 1 + for rows.Next() + 提前退出 + defer rows.Close()
+	oneConnWithRowsNextWithErrorWithRowsClose()
+}
+</code></pre>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://lvoooo.github.io/post/xian-guang">
+                <h3 class="post-title">
+                  闲逛
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -223,11 +365,11 @@
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge success">
+        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge secondary">
           分页
         </a>
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge ">
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
           Go
         </a>
       
@@ -243,15 +385,15 @@
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge success">
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge warning">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge success">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
           Gridea
         </a>
       

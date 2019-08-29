@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Go Profile | lvoooo&#39;s memory</title>
+<title>Go Profile&amp;Debug | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1567059492307">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1567067408611">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -89,7 +89,7 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Go Profile</h1>
+            <h1>Go Profile&amp;Debug</h1>
             <p class="article-meta">
               2019-08-27
               
@@ -105,7 +105,8 @@
             
             <div class="post-content">
               <p>参考:<br>
-https://blog.csdn.net/get_set/article/details/81229629</p>
+https://blog.csdn.net/get_set/article/details/81229629<br>
+https://mp.weixin.qq.com/s?__biz=MzI3MjU4Njk3Ng==&amp;mid=2247484253&amp;idx=2&amp;sn=3b640a7a4b3b9f10ed7400be740fcf5a</p>
 <h3 id="benchmark">benchmark</h3>
 <h4 id="benchmark测试有如下约定">benchmark测试有如下约定：</h4>
 <ul>
@@ -184,6 +185,31 @@ export PATH=$PATH:~/.flamegraph
 
 go get github.com/uber/go-torch
 </code></pre>
+<h3 id="godebug">GODEBUG</h3>
+<p>http://www.goinggo.net/2014/01/concurrency-goroutines-and-gomaxprocs.html<br>
+http://morsmachine.dk/go-scheduler</p>
+<pre><code>GOMAXPROCS=1 GODEBUG=schedtrace=1000 ./example
+GOMAXPROCS=2 GODEBUG=schedtrace=1000,scheddetail=1 ./example
+</code></pre>
+<pre><code>1009ms       : 时间是以毫秒为单位，表示了从程序开始运行的时间。这个是第一秒的跟踪信息。
+
+gomaxprocs=1 : 配置的最大的处理器的个数
+              本程序只配置了一个
+
+更多说明：
+
+这里的处理器是逻辑上的处理器而非物理上的处理器。调度器在这些逻辑处理器上运行 goroutines，这些逻辑处理器通过所附着的操作系统线程绑定在物理处理器上的。 操作系统将在可见的物理存储器上调度线程。
+
+threads=3     : 运行时管理的线程个数。有三个线程存在，一个是给处理器使用，其他两个是被运行时使用。
+
+idlethreads=1 : 空闲的线程个数。一个空闲，两个正在运行。
+
+idleprocs=0   : 空闲的处理器个数。这里空闲个数为 0，有一个运行中。
+
+runqueue=0   : 在全局运行队列中等待的 goroutinue 数量。所有可运行的 goroutinue 都被移到了本地的运行队列中。
+
+[9]           : 本地运行队列中等待的 goroutine 数量。当前有 9 个 goroutine 在本地运行队列等待。
+</code></pre>
 
             </div>
           </article>
@@ -207,7 +233,7 @@ go get github.com/uber/go-torch
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1567059492307" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1567067408611" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -232,13 +258,25 @@ go get github.com/uber/go-torch
         
           
             <li>
+              <a href="https://lvoooo.github.io/post/go-fen-ye">Go 分页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://lvoooo.github.io/post/go-databasesql-de-lian-jie-chi">Go database/sql的连接池</a>
+            </li>
+          
+        
+          
+            <li>
               <a href="https://lvoooo.github.io/post/xian-guang">闲逛</a>
             </li>
           
         
           
             <li>
-              <a href="https://lvoooo.github.io/post/go-profile">Go Profile</a>
+              <a href="https://lvoooo.github.io/post/go-profile">Go Profile&amp;Debug</a>
             </li>
           
         
@@ -279,15 +317,7 @@ go get github.com/uber/go-torch
           
         
           
-            <li>
-              <a href="https://lvoooo.github.io/post/su-cha">速查</a>
-            </li>
-          
         
-          
-            <li>
-              <a href="https://lvoooo.github.io/post/hello-gridea">Hello Gridea</a>
-            </li>
           
         
       </ul>
@@ -299,7 +329,11 @@ go get github.com/uber/go-torch
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge secondary">
+          分页
+        </a>
+      
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge success">
           Go
         </a>
       
@@ -307,23 +341,23 @@ go get github.com/uber/go-torch
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge success">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge success">
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
           Gridea
         </a>
       
