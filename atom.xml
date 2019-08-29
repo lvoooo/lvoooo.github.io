@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-08-27T09:45:58.892Z</updated>
+    <updated>2019-08-29T06:18:19.588Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://lvoooo.github.io/images/avatar.png</logo>
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
+    <entry>
+        <title type="html"><![CDATA[闲逛]]></title>
+        <id>https://lvoooo.github.io/post/xian-guang</id>
+        <link href="https://lvoooo.github.io/post/xian-guang">
+        </link>
+        <updated>2019-08-29T06:17:59.000Z</updated>
+        <content type="html"><![CDATA[<p>https://www.yeboke.cn/</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Go Profile]]></title>
         <id>https://lvoooo.github.io/post/go-profile</id>
@@ -90,6 +99,12 @@ ok      hello/bench_test    1.159s
 <li>输出图片 go tool pprof -svg ./bench_test.test cpu.out &gt; cpu.svg</li>
 <li>生成火焰图 go-torch -b cpu.out -f cpu.torch.svg</li>
 </ol>
+<h4 id="go-torch-安装">go-torch 安装</h4>
+<pre><code>git clone --depth=1 https://github.com/brendangregg/FlameGraph.git ~/.flamegraph
+export PATH=$PATH:~/.flamegraph
+
+go get github.com/uber/go-torch
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -116,12 +131,13 @@ username  ALL=(ALL)       NOPASSWD:ALL
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Fabric CA]]></title>
+        <title type="html"><![CDATA[Fabric]]></title>
         <id>https://lvoooo.github.io/post/fabric-ca</id>
         <link href="https://lvoooo.github.io/post/fabric-ca">
         </link>
         <updated>2019-08-13T09:46:10.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="安装">安装</h3>
+        <content type="html"><![CDATA[<h2 id="fabric-ca">Fabric CA</h2>
+<h3 id="安装">安装</h3>
 <ol>
 <li>sudo apt update</li>
 <li>sudo apt install libtool libltdl-dev</li>
@@ -155,6 +171,43 @@ fabric-ca-server-config.yaml<br>
 fabric-ca-server.db<br>
 msp</p>
 </blockquote>
+<h2 id="fabric性能测试">Fabric性能测试</h2>
+<h3 id="参考">参考</h3>
+<ol>
+<li>https://blog.csdn.net/get_set/article/details/81229629</li>
+<li>https://github.com/hyperledger-archives/fabric/wiki/Profiling-the-Hyperledger-Fabric#other-profiling</li>
+</ol>
+<h3 id="配置">配置</h3>
+<p>Dockerfile</p>
+<pre><code># Orderer
+- ORDERER_GENERAL_PROFILE_ENABLED=true
+
+# Peer
+- CORE_PEER_PROFILE_ENABLED=true
+
+# Peer
+</code></pre>
+<h3 id="分析">分析</h3>
+<pre><code># Peer
+
+#生成  pb 文件
+go tool pprof http://&lt;peer-ip&gt;:6060/debug/pprof/profile
+~/pprof/pprof.peer.samples.cpu.001.pb.gz
+
+# 生成 火焰图
+go-torch -b pprof.peer.samples.cpu.001.pb.gz -f peer.cpu.torch.svg
+peer.cpu.torch.svg
+
+# Orderer
+
+#生成  pb 文件
+go tool pprof http://&lt;peer-ip&gt;:6060/debug/pprof/profile
+~/pprof/pprof.orderer.samples.cpu.001.pb.gz
+
+# 生成 火焰图
+go-torch -b pprof.orderer.samples.cpu.001.pb.gz -f orderer.cpu.torch.svg
+orderer.cpu.torch.svg
+</code></pre>
 ]]></content>
     </entry>
     <entry>

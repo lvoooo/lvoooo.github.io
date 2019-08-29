@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Fabric CA | lvoooo&#39;s memory</title>
+<title>Fabric | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1566899134125">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1567059492307">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -89,18 +89,19 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Fabric CA</h1>
+            <h1>Fabric</h1>
             <p class="article-meta">
               2019-08-13
               
-                <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge warning">
+                <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
                   HyperledgerFabric
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h3 id="安装">安装</h3>
+              <h2 id="fabric-ca">Fabric CA</h2>
+<h3 id="安装">安装</h3>
 <ol>
 <li>sudo apt update</li>
 <li>sudo apt install libtool libltdl-dev</li>
@@ -134,6 +135,43 @@ fabric-ca-server-config.yaml<br>
 fabric-ca-server.db<br>
 msp</p>
 </blockquote>
+<h2 id="fabric性能测试">Fabric性能测试</h2>
+<h3 id="参考">参考</h3>
+<ol>
+<li>https://blog.csdn.net/get_set/article/details/81229629</li>
+<li>https://github.com/hyperledger-archives/fabric/wiki/Profiling-the-Hyperledger-Fabric#other-profiling</li>
+</ol>
+<h3 id="配置">配置</h3>
+<p>Dockerfile</p>
+<pre><code># Orderer
+- ORDERER_GENERAL_PROFILE_ENABLED=true
+
+# Peer
+- CORE_PEER_PROFILE_ENABLED=true
+
+# Peer
+</code></pre>
+<h3 id="分析">分析</h3>
+<pre><code># Peer
+
+#生成  pb 文件
+go tool pprof http://&lt;peer-ip&gt;:6060/debug/pprof/profile
+~/pprof/pprof.peer.samples.cpu.001.pb.gz
+
+# 生成 火焰图
+go-torch -b pprof.peer.samples.cpu.001.pb.gz -f peer.cpu.torch.svg
+peer.cpu.torch.svg
+
+# Orderer
+
+#生成  pb 文件
+go tool pprof http://&lt;peer-ip&gt;:6060/debug/pprof/profile
+~/pprof/pprof.orderer.samples.cpu.001.pb.gz
+
+# 生成 火焰图
+go-torch -b pprof.orderer.samples.cpu.001.pb.gz -f orderer.cpu.torch.svg
+orderer.cpu.torch.svg
+</code></pre>
 
             </div>
           </article>
@@ -157,7 +195,7 @@ msp</p>
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1566899134125" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1567059492307" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -182,6 +220,12 @@ msp</p>
         
           
             <li>
+              <a href="https://lvoooo.github.io/post/xian-guang">闲逛</a>
+            </li>
+          
+        
+          
+            <li>
               <a href="https://lvoooo.github.io/post/go-profile">Go Profile</a>
             </li>
           
@@ -194,7 +238,7 @@ msp</p>
         
           
             <li>
-              <a href="https://lvoooo.github.io/post/fabric-ca">Fabric CA</a>
+              <a href="https://lvoooo.github.io/post/fabric-ca">Fabric</a>
             </li>
           
         
@@ -247,15 +291,15 @@ msp</p>
           Go
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge success">
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
           network
         </a>
       
@@ -263,11 +307,11 @@ msp</p>
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge warning">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge success">
           Gridea
         </a>
       
