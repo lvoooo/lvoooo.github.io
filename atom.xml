@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-09-03T04:53:49.422Z</updated>
+    <updated>2019-09-25T11:39:18.497Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://lvoooo.github.io/images/avatar.png</logo>
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
+    <entry>
+        <title type="html"><![CDATA[Dockerfile]]></title>
+        <id>https://lvoooo.github.io/post/dockerfile</id>
+        <link href="https://lvoooo.github.io/post/dockerfile">
+        </link>
+        <updated>2019-09-25T11:32:28.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="copy">COPY</h4>
+<p>https://www.cnblogs.com/sparkdev/p/9573248.html</p>
+<pre><code>WORKDIR /app
+COPY nickdir ./nickdir
+</code></pre>
+<h4 id="更换crates源">更换Crates源</h4>
+<p>https://www.linuxidc.com/Linux/2019-05/158485.htm</p>
+<pre><code>vim config
+
+[source.crates-io]
+registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+replace-with = 'ustc'
+[source.ustc]
+registry = &quot;git://mirrors.ustc.edu.cn/crates.io-index&quot;
+
+# 如果不可以使用 git
+registry = &quot;https://mirrors.ustc.edu.cn/crates.io-index&quot;
+</code></pre>
+<p>之后，在build的过程中 把 config 文件拷贝进去即可。</p>
+<h4 id="更换镜像-sourcelist">更换镜像 source.list</h4>
+<h5 id="ubuntu">ubuntu</h5>
+<pre><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multivers
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Go 分页]]></title>
         <id>https://lvoooo.github.io/post/go-fen-ye</id>
@@ -586,33 +628,6 @@ ID changed sucessfully.
         </link>
         <updated>2019-07-25T10:46:28.000Z</updated>
         <content type="html"><![CDATA[<p>https://gin-gonic.com/docs/</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Mysql 连接方式以及配置]]></title>
-        <id>https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi</id>
-        <link href="https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi">
-        </link>
-        <updated>2019-07-10T03:10:11.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>mysql -h127.0.01 -uroot -p
-mysql --socket=/var/lib/mysql/mysql.sock  -p
-</code></pre>
-<p>TCP连接（Linux，Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--port=PORT	3306<br>
-CLIENT	--protocol=TCP --port=PORT	3306</p>
-<p>SOCKET连接（Linux）：<br>
-目标	启动选项	默认值<br>
-SERVER	--enable-named-pipe --socket=SOCKET	/tmp/mysql.sock<br>
-CLIENT	--protocol=SOCKET --socket=SOCKET	/tmp/mysql.sock</p>
-<p>PIPE连接（Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--enable-named-pipe --socket=SOCKET	MYSQL<br>
-CLIENT	--protocol=PIPE --socket=SOCKET	MYSQL</p>
-<p>SHARED MEMORY连接（Windows）：<br>
-目标	启动选项	默认值<br>
-SERVER	--shared-memory --shared-memory-base-name=MEMORY	MySQL<br>
-CLIENT	--protocol=MEMORY --shared-memory-base-name=MEMORY	MySQL</p>
 ]]></content>
     </entry>
 </feed>
