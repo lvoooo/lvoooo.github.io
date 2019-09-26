@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-09-26T01:45:47.686Z</updated>
+    <updated>2019-09-26T01:57:39.945Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -26,6 +26,17 @@ sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+</code></pre>
+<h4 id="镜像">镜像</h4>
+<pre><code class="language-shell">## 导出
+docker images
+docker save 9045 &gt; enigma_core.tar
+[root@wxtest1607 lixr]# ls -lh
+总用量 1.2G
+-rw-r--r--  1 root root  1005M 8月  24 17:42 tomcat8-apr.tar
+
+## 导入
+docker load &lt; enigma_core.tar
 </code></pre>
 <h4 id="copy">COPY</h4>
 <p>https://www.cnblogs.com/sparkdev/p/9573248.html</p>

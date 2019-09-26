@@ -7,7 +7,7 @@
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569462343234">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569463053792">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -107,6 +107,17 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 </code></pre>
+<h4 id="镜像">镜像</h4>
+<pre><code class="language-shell">## 导出
+docker images
+docker save 9045 &gt; enigma_core.tar
+[root@wxtest1607 lixr]# ls -lh
+总用量 1.2G
+-rw-r--r--  1 root root  1005M 8月  24 17:42 tomcat8-apr.tar
+
+## 导入
+docker load &lt; enigma_core.tar
+</code></pre>
 <h4 id="copy">COPY</h4>
 <p>https://www.cnblogs.com/sparkdev/p/9573248.html</p>
 <pre><code class="language-dockerfile">WORKDIR /app
@@ -164,7 +175,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1569462343234" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1569463053792" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -266,7 +277,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
           分页
         </a>
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge success">
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
           Go
         </a>
       
@@ -274,11 +285,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge success">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
           network
         </a>
       
@@ -286,11 +297,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge success">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
           Gridea
         </a>
       
