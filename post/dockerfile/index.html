@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Dockerfile | lvoooo&#39;s memory</title>
+<title>Docker | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569411677567">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569462343234">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -89,21 +89,32 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Dockerfile</h1>
+            <h1>Docker</h1>
             <p class="article-meta">
               2019-09-25
               
             </p>
             
             <div class="post-content">
-              <h4 id="copy">COPY</h4>
+              <h3 id="安装">安装</h3>
+<h4 id="镜像加速器">镜像加速器</h4>
+<pre><code class="language-shell">sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
+{
+  &quot;registry-mirrors&quot;: [&quot;https://0yo2rx5y.mirror.aliyuncs.com&quot;]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+<h4 id="copy">COPY</h4>
 <p>https://www.cnblogs.com/sparkdev/p/9573248.html</p>
-<pre><code>WORKDIR /app
+<pre><code class="language-dockerfile">WORKDIR /app
 COPY nickdir ./nickdir
 </code></pre>
 <h4 id="更换crates源">更换Crates源</h4>
 <p>https://www.linuxidc.com/Linux/2019-05/158485.htm</p>
-<pre><code>vim config
+<pre><code class="language-shell">vim config
 
 [source.crates-io]
 registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
@@ -117,7 +128,7 @@ registry = &quot;https://mirrors.ustc.edu.cn/crates.io-index&quot;
 <p>之后，在build的过程中 把 config 文件拷贝进去即可。</p>
 <h4 id="更换镜像-sourcelist">更换镜像 source.list</h4>
 <h5 id="ubuntu">ubuntu</h5>
-<pre><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+<pre><code class="language-text"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
@@ -153,7 +164,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1569411677567" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1569462343234" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -178,7 +189,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
         
           
             <li>
-              <a href="https://lvoooo.github.io/post/dockerfile">Dockerfile</a>
+              <a href="https://lvoooo.github.io/post/dockerfile">Docker</a>
             </li>
           
         
@@ -263,23 +274,23 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge warning">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge success">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge ">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge secondary">
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge success">
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge ">
           Gridea
         </a>
       

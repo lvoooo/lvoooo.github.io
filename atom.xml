@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-09-25T11:41:35.702Z</updated>
+    <updated>2019-09-26T01:45:47.686Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -11,19 +11,30 @@
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
     <entry>
-        <title type="html"><![CDATA[Dockerfile]]></title>
+        <title type="html"><![CDATA[Docker]]></title>
         <id>https://lvoooo.github.io/post/dockerfile</id>
         <link href="https://lvoooo.github.io/post/dockerfile">
         </link>
         <updated>2019-09-25T11:32:28.000Z</updated>
-        <content type="html"><![CDATA[<h4 id="copy">COPY</h4>
+        <content type="html"><![CDATA[<h3 id="安装">安装</h3>
+<h4 id="镜像加速器">镜像加速器</h4>
+<pre><code class="language-shell">sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
+{
+  &quot;registry-mirrors&quot;: [&quot;https://0yo2rx5y.mirror.aliyuncs.com&quot;]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+<h4 id="copy">COPY</h4>
 <p>https://www.cnblogs.com/sparkdev/p/9573248.html</p>
-<pre><code>WORKDIR /app
+<pre><code class="language-dockerfile">WORKDIR /app
 COPY nickdir ./nickdir
 </code></pre>
 <h4 id="更换crates源">更换Crates源</h4>
 <p>https://www.linuxidc.com/Linux/2019-05/158485.htm</p>
-<pre><code>vim config
+<pre><code class="language-shell">vim config
 
 [source.crates-io]
 registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
@@ -37,7 +48,7 @@ registry = &quot;https://mirrors.ustc.edu.cn/crates.io-index&quot;
 <p>之后，在build的过程中 把 config 文件拷贝进去即可。</p>
 <h4 id="更换镜像-sourcelist">更换镜像 source.list</h4>
 <h5 id="ubuntu">ubuntu</h5>
-<pre><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+<pre><code class="language-text"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
