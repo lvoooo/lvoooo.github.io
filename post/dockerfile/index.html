@@ -7,7 +7,7 @@
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569463072168">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569832070145">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -124,17 +124,29 @@ docker load &lt; enigma_core.tar
 COPY nickdir ./nickdir
 </code></pre>
 <h4 id="更换crates源">更换Crates源</h4>
-<p>https://www.linuxidc.com/Linux/2019-05/158485.htm</p>
+<p>https://www.linuxidc.com/Linux/2019-05/158485.htm<br>
+https://www.debugmyself.com/p/2019/8/8/rust/</p>
 <pre><code class="language-shell">vim config
 
+### 中科大
 [source.crates-io]
 registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+
 replace-with = 'ustc'
 [source.ustc]
 registry = &quot;git://mirrors.ustc.edu.cn/crates.io-index&quot;
 
 # 如果不可以使用 git
 registry = &quot;https://mirrors.ustc.edu.cn/crates.io-index&quot;
+
+### 阿里云
+[source.crates-io]
+registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+
+replace-with = &quot;rustcc&quot;
+[source.rustcc]
+registry = &quot;https://code.aliyun.com/rustcc/crates.io-index.git&quot;
+
 </code></pre>
 <p>之后，在build的过程中 把 config 文件拷贝进去即可。</p>
 <h4 id="更换镜像-sourcelist">更换镜像 source.list</h4>
@@ -175,7 +187,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1569463072168" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1569832070145" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -273,11 +285,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge warning">
           分页
         </a>
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge ">
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
           Go
         </a>
       
@@ -285,19 +297,19 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge success">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge success">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge success">
           NAT
         </a>
       
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge ">
+        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge secondary">
           mysql
         </a>
       
