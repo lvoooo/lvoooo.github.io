@@ -7,7 +7,7 @@
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1572241024666">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1572245559002">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -93,11 +93,11 @@
             <p class="article-meta">
               2019-08-27
               
-                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge success">
+                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
                   Go
                 </a>
               
-                <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge ">
+                <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge success">
                   性能分析
                 </a>
               
@@ -106,7 +106,20 @@
             <div class="post-content">
               <p>参考:<br>
 https://blog.csdn.net/get_set/article/details/81229629<br>
-https://mp.weixin.qq.com/s?__biz=MzI3MjU4Njk3Ng==&amp;mid=2247484253&amp;idx=2&amp;sn=3b640a7a4b3b9f10ed7400be740fcf5a</p>
+https://mp.weixin.qq.com/s?__biz=MzI3MjU4Njk3Ng==&amp;mid=2247484253&amp;idx=2&amp;sn=3b640a7a4b3b9f10ed7400be740fcf5a<br>
+https://speakerdeck.com/eranyanay/going-infinite-handling-1m-websockets-connections-in-go</p>
+<h3 id="pprof">pprof</h3>
+<pre><code class="language-go">import _ &quot;net/http/pprof&quot;
+
+go func() {
+    if err := http.ListenAndServe(&quot;localhost:6060&quot;, nil); err != nil {
+        log.Fatalf(&quot;Pprof failed: %v&quot;, err)
+    }
+}()
+</code></pre>
+<pre><code class="language-shell">go tool pprof http://localhost:6060/debug/pprof/heap
+go tool pprof http://localhost:6060/debug/pprof/goroutine
+</code></pre>
 <h3 id="benchmark">benchmark</h3>
 <h4 id="benchmark测试有如下约定">benchmark测试有如下约定：</h4>
 <ul>
@@ -233,7 +246,7 @@ runqueue=0   : 在全局运行队列中等待的 goroutinue 数量。所有可�
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1572241024666" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1572245559002" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -335,23 +348,23 @@ runqueue=0   : 在全局运行队列中等待的 goroutinue 数量。所有可�
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge success">
+        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge ">
           分页
         </a>
       
-        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge success">
+        <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge ">
           Go
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge success">
+        <a href="https://lvoooo.github.io/tag/_dyBQnpb0X" class="badge ">
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge ">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
           network
         </a>
       
