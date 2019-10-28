@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>mysql | lvoooo&#39;s memory</title>
+<title>Mac | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://lvoooo.github.io">lvoooo&#39;s memory</a></h3>
@@ -87,40 +88,83 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: mysql</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi">Mysql 连接方式以及配置</a>
-    </h2>
-    <p class="article-meta">
-      2019-07-10
-      
-        <a href="https://lvoooo.github.io/tag/jsYJsz-dZ" class="badge ">
-          mysql
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://lvoooo.github.io/post/mysql-lian-jie-fang-shi-yi-ji-pei-zhi" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>Mac</h1>
+            <p class="article-meta">
+              2019-10-17
+              
+            </p>
+            
+            <div class="post-content">
+              <h3 id="mac-os制作ubuntu安装u盘">Mac OS制作Ubuntu安装U盘</h3>
+<h4 id="镜像下载">镜像下载</h4>
+<p>https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/</p>
+<h4 id="工具版">工具版</h4>
+<ol>
+<li>确保你的U盘至少有4G空间</li>
+<li>获取Ubuntu ISO映像文件</li>
+<li>应用-&gt;其它-&gt;磁盘工具</li>
+<li>选择U盘，然后擦除。千万别选错了Mac的硬盘啊！！！</li>
+<li>选在格式: MS-DOS (FAT)</li>
+<li>点击“擦除”</li>
+<li>下载、安装、打开 Etcher</li>
+<li>选择Ubuntu镜像文件</li>
+<li>选择U盘</li>
+<li>点击“Flash”刻录</li>
+</ol>
+<h4 id="命令行版本">命令行版本</h4>
+<pre><code class="language-shell">## 转换格式
+hdiutil convert -format UDRW -o ubuntu.iso ubuntu-18.04.3-live-server-amd64.iso
+# -format为生成文件的权限,UDRW :表示转换成有read/write的权限的镜像。
 
+## 列出当前存储
+diskutil list
 
+## 卸载
+diskutil unmountDisk u盘
+
+## 写入镜像
+mv ubuntu.iso.dmg ubuntu.iso
+sudo dd if=./ubuntu.iso of=U盘 bs=1m
+# root 命令
+# if:输入的文件名
+# of:输出的文件名
+# bs:是块大小，这里使用1m的块大小。
+
+## 推出
+sudo eject u盘
+
+## 清除
+sudo dd if=/dev/urandom of=/dev/rdisk2
+</code></pre>
+<h4 id="多分区">多分区</h4>
+<p>参考 https://tommy.net.cn/2016/07/20/create-a-bootable-ubuntu-usb-stick-on-mac-os-x/</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81ac9bxmvj31di0u0gr8.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acgne2rj31di0u0dkp.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acsrfvmj30zc0rgwim.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acy4vfbj30zc0rgtc9.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81ad31ifhj30zc0rg0vg.jpg" alt=""></p>
+
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://lvoooo.github.io/post/dockerfile">
+                <h3 class="post-title">
+                  Docker
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://lvoooo.github.io/images/avatar.png?v=1572241024666" class="no-responsive avatar">
@@ -241,11 +285,11 @@
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge secondary">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge warning">
           NAT
         </a>
       
@@ -253,7 +297,7 @@
           mysql
         </a>
       
-        <a href="https://lvoooo.github.io/tag/gridea" class="badge warning">
+        <a href="https://lvoooo.github.io/tag/gridea" class="badge success">
           Gridea
         </a>
       
@@ -263,6 +307,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lvoooo.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 

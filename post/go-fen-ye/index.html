@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Go 分页 | lvoooo&#39;s memory</title>
+<title>Golang | lvoooo&#39;s memory</title>
 <meta name="description" content="治疗失忆。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1569832070145">
+<link rel="shortcut icon" href="https://lvoooo.github.io/favicon.ico?v=1572241024666">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -89,22 +89,32 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Go 分页</h1>
+            <h1>Golang</h1>
             <p class="article-meta">
               2019-08-29
               
-                <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge warning">
+                <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge ">
                   分页
                 </a>
               
-                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge secondary">
+                <a href="https://lvoooo.github.io/tag/a9h46r1Qb" class="badge ">
                   Go
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h3 id="方法">方法</h3>
+              <h2 id="同源策略">同源策略</h2>
+<h3 id="跨域资源请求">跨域资源请求</h3>
+<pre><code>var upgrader = websocket.Upgrader{
+	// 解决跨域问题
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
+</code></pre>
+<h2 id="分页">分页</h2>
+<h3 id="方法">方法</h3>
 <p>https://www.v2ex.com/t/595976</p>
 <p>增加有效可利用的索引，其目的是减少每次查询时的系统负载。</p>
 <ol start="0">
@@ -144,7 +154,7 @@ go test -v $GOPATH/src/github.com/ikaiguang/go-pagination-example
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://lvoooo.github.io/images/avatar.png?v=1569832070145" class="no-responsive avatar">
+    <img src="https://lvoooo.github.io/images/avatar.png?v=1572241024666" class="no-responsive avatar">
     <div class="text-muted">治疗失忆。</div>
     <div class="social-container">
       
@@ -169,13 +179,25 @@ go test -v $GOPATH/src/github.com/ikaiguang/go-pagination-example
         
           
             <li>
+              <a href="https://lvoooo.github.io/post/ubuntu">ubuntu</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://lvoooo.github.io/post/mac">Mac</a>
+            </li>
+          
+        
+          
+            <li>
               <a href="https://lvoooo.github.io/post/dockerfile">Docker</a>
             </li>
           
         
           
             <li>
-              <a href="https://lvoooo.github.io/post/go-fen-ye">Go 分页</a>
+              <a href="https://lvoooo.github.io/post/go-fen-ye">Golang</a>
             </li>
           
         
@@ -216,15 +238,7 @@ go test -v $GOPATH/src/github.com/ikaiguang/go-pagination-example
           
         
           
-            <li>
-              <a href="https://lvoooo.github.io/post/chang-yong-gong-ju">常用工具</a>
-            </li>
-          
         
-          
-            <li>
-              <a href="https://lvoooo.github.io/post/kuang-jia">框架</a>
-            </li>
           
         
           
@@ -242,7 +256,7 @@ go test -v $GOPATH/src/github.com/ikaiguang/go-pagination-example
     </div>
     <div class="row">
       
-        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge success">
+        <a href="https://lvoooo.github.io/tag/JeO2ScXL8f" class="badge secondary">
           分页
         </a>
       
@@ -254,15 +268,15 @@ go test -v $GOPATH/src/github.com/ikaiguang/go-pagination-example
           性能分析
         </a>
       
-        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/dFzaVeZxnp" class="badge warning">
           HyperledgerFabric
         </a>
       
-        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge ">
+        <a href="https://lvoooo.github.io/tag/_KYp4nD0R" class="badge warning">
           network
         </a>
       
-        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge secondary">
+        <a href="https://lvoooo.github.io/tag/k2ysl66mO" class="badge ">
           NAT
         </a>
       

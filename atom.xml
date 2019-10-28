@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lvoooo.github.io</id>
     <title>lvoooo&apos;s memory</title>
-    <updated>2019-09-30T08:27:54.816Z</updated>
+    <updated>2019-10-28T05:37:12.622Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lvoooo.github.io"/>
     <link rel="self" href="https://lvoooo.github.io/atom.xml"/>
@@ -10,6 +10,81 @@
     <logo>https://lvoooo.github.io/images/avatar.png</logo>
     <icon>https://lvoooo.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, lvoooo&apos;s memory</rights>
+    <entry>
+        <title type="html"><![CDATA[ubuntu]]></title>
+        <id>https://lvoooo.github.io/post/ubuntu</id>
+        <link href="https://lvoooo.github.io/post/ubuntu">
+        </link>
+        <updated>2019-10-24T07:34:52.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="刷新地址">刷新地址</h3>
+<p>1、释放Ip<br>
+#dhclient -r<br>
+2、重新获取ip<br>
+#dhclient<br>
+3、停止网卡服务<br>
+#ifdown eth0<br>
+4、启动网卡服务<br>
+#ifup eth0<br>
+5、更新网卡<br>
+#/etc/init.d/network restart</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mac]]></title>
+        <id>https://lvoooo.github.io/post/mac</id>
+        <link href="https://lvoooo.github.io/post/mac">
+        </link>
+        <updated>2019-10-17T08:11:48.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="mac-os制作ubuntu安装u盘">Mac OS制作Ubuntu安装U盘</h3>
+<h4 id="镜像下载">镜像下载</h4>
+<p>https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/</p>
+<h4 id="工具版">工具版</h4>
+<ol>
+<li>确保你的U盘至少有4G空间</li>
+<li>获取Ubuntu ISO映像文件</li>
+<li>应用-&gt;其它-&gt;磁盘工具</li>
+<li>选择U盘，然后擦除。千万别选错了Mac的硬盘啊！！！</li>
+<li>选在格式: MS-DOS (FAT)</li>
+<li>点击“擦除”</li>
+<li>下载、安装、打开 Etcher</li>
+<li>选择Ubuntu镜像文件</li>
+<li>选择U盘</li>
+<li>点击“Flash”刻录</li>
+</ol>
+<h4 id="命令行版本">命令行版本</h4>
+<pre><code class="language-shell">## 转换格式
+hdiutil convert -format UDRW -o ubuntu.iso ubuntu-18.04.3-live-server-amd64.iso
+# -format为生成文件的权限,UDRW :表示转换成有read/write的权限的镜像。
+
+## 列出当前存储
+diskutil list
+
+## 卸载
+diskutil unmountDisk u盘
+
+## 写入镜像
+mv ubuntu.iso.dmg ubuntu.iso
+sudo dd if=./ubuntu.iso of=U盘 bs=1m
+# root 命令
+# if:输入的文件名
+# of:输出的文件名
+# bs:是块大小，这里使用1m的块大小。
+
+## 推出
+sudo eject u盘
+
+## 清除
+sudo dd if=/dev/urandom of=/dev/rdisk2
+</code></pre>
+<h4 id="多分区">多分区</h4>
+<p>参考 https://tommy.net.cn/2016/07/20/create-a-bootable-ubuntu-usb-stick-on-mac-os-x/</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81ac9bxmvj31di0u0gr8.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acgne2rj31di0u0dkp.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acsrfvmj30zc0rgwim.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81acy4vfbj30zc0rgtc9.jpg" alt=""><br>
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g81ad31ifhj30zc0rg0vg.jpg" alt=""></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Docker]]></title>
         <id>https://lvoooo.github.io/post/dockerfile</id>
@@ -87,12 +162,22 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Go 分页]]></title>
+        <title type="html"><![CDATA[Golang]]></title>
         <id>https://lvoooo.github.io/post/go-fen-ye</id>
         <link href="https://lvoooo.github.io/post/go-fen-ye">
         </link>
         <updated>2019-08-29T07:37:03.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="方法">方法</h3>
+        <content type="html"><![CDATA[<h2 id="同源策略">同源策略</h2>
+<h3 id="跨域资源请求">跨域资源请求</h3>
+<pre><code>var upgrader = websocket.Upgrader{
+	// 解决跨域问题
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
+</code></pre>
+<h2 id="分页">分页</h2>
+<h3 id="方法">方法</h3>
 <p>https://www.v2ex.com/t/595976</p>
 <p>增加有效可利用的索引，其目的是减少每次查询时的系统负载。</p>
 <ol start="0">
@@ -508,160 +593,6 @@ orderer.cpu.torch.svg
 <strong>port限制型-对称型</strong>	A通过server获得B的IP:port1，A向B发送UDP包，数据通过自己的NAT时会为B建立NAT映射条目；B通过server获得A的IP:port，发送UDP包为A建立NAT映射条目，但由于B更换了新端口port2，A刚建立的映射无法使用，A故此无法收到B为A通信使用的新端口，无法建立NAT映射，两者无法互通。<br>
 <strong>对称型-对称型</strong>	同上，对称型开启新端口对方无法获悉，无法建立链接。<br>
 无法P2P就需要用TURN服务器转发数据了…</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[常用工具]]></title>
-        <id>https://lvoooo.github.io/post/chang-yong-gong-ju</id>
-        <link href="https://lvoooo.github.io/post/chang-yong-gong-ju">
-        </link>
-        <updated>2019-07-28T09:20:56.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="teamviewer">TeamViewer</h3>
-<h4 id="修改id">修改ID</h4>
-<p><a href="https://blog.csdn.net/qq_39729527/article/details/86620987">参考链接</a></p>
-<ol>
-<li>退出TeamView账户，退出TeamView进程</li>
-<li>编写 TeamViewer-id-changer.py</li>
-<li>执行脚本</li>
-<li>重启电脑</li>
-</ol>
-<pre><code>#!/usr/bin/env python 
-#coding:utf-8
-#  python2
-
-import sys
-import os
-import glob
-import platform
-import re
-import random
-import string
- 
-print('''
---------------------------------
-TeamViewer ID Changer for MAC OS
---------------------------------
-''')
- 
-if platform.system() != 'Darwin':
-    print('This script can be run only on MAC OS.')
-    sys.exit();
- 
-if os.geteuid() != 0:
-    print('This script must be run form root.')
-    sys.exit();
- 
-if os.environ.has_key('SUDO_USER'):
-    USERNAME = os.environ['SUDO_USER']
-    if USERNAME == 'root':
-       print('Can not find user name. Run this script via sudo from regular user')
-       sys.exit();
-else:
-    print('Can not find user name. Run this script via sudo from regular user')
-    sys.exit();
- 
-HOMEDIRLIB = '/Users/' + USERNAME  + '/Library/Preferences/'
-GLOBALLIB  =  '/Library/Preferences/'
- 
-CONFIGS = []
- 
-# Find config files
- 
-def listdir_fullpath(d):
-    return [os.path.join(d, f) for f in os.listdir(d)]
- 
-for file in listdir_fullpath(HOMEDIRLIB):
-    if 'teamviewer'.lower() in file.lower():
-        CONFIGS.append(file)
- 
-if not CONFIGS:
-    print ('''
-There is no TemViewer configs found.
-Maybe you have deleted it manualy or never run TeamViewer after installation.
-Nothing to delete.
-''')
-# Delete config files
-else:
-    print(&quot;Configs found:\n&quot;)
-    for file in CONFIGS:
-        print file
- 
-    print('''
-This files will be DELETED permanently.
-All TeamViewer settings will be lost
-''')
-    raw_input(&quot;Press Enter to continue or CTR+C to abort...&quot;)
- 
-    for file in CONFIGS:
-        try:
-            os.remove(file)
-        except:
-            print(&quot;Cannot delete config files. Permission denied?&quot;)
-            sys.exit();
-    print(&quot;Done.&quot;)
- 
-# Find binaryes
- 
-TMBINARYES = [
-'/Applications/TeamViewer.app/Contents/MacOS/TeamViewer',
-'/Applications/TeamViewer.app/Contents/MacOS/TeamViewer_Service',
-'/Applications/TeamViewer.app/Contents/Helpers/TeamViewer_Desktop',
-]
- 
-for file in TMBINARYES:
-    if os.path.exists(file):
-        pass
-    else:
-        print(&quot;File not found: &quot; + file)
-        print (&quot;Install TeamViewer correctly&quot;)
-        sys.exit();
- 
-# Patch files
- 
-def idpatch(fpath,platf,serial):
-    file = open(fpath, 'r+b')
-    binary = file.read()
-    PlatformPattern = &quot;IOPlatformExpert.{6}&quot;
-    SerialPattern =  &quot;IOPlatformSerialNumber%s%s%sUUID&quot;
- 
-    binary = re.sub(PlatformPattern, platf, binary)
-    binary = re.sub(SerialPattern % (chr(0), &quot;[0-9a-zA-Z]{8,8}&quot;, chr(0)), SerialPattern%(chr(0), serial, chr(0)), binary)
- 
-    file = open(fpath,'wb').write(binary)
-    return True
- 
-def random_generator(size=8, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
- 
-RANDOMSERIAL = random_generator()
-RANDOMPLATFORM = &quot;IOPlatformExpert&quot; + random_generator(6)
- 
- 
-for file in TMBINARYES:
-        try:
-            idpatch(file,RANDOMPLATFORM,RANDOMSERIAL)
-        except:
-            print &quot;Error: can not patch file &quot; + file
-            print &quot;Wrong version?&quot;
-            sys.exit();
- 
-print &quot;PlatformDevice: &quot; + RANDOMPLATFORM
-print &quot;PlatformSerial: &quot; + RANDOMSERIAL
- 
-print('''
-ID changed sucessfully.
-!!! Restart computer before using TeamViewer !!!!
-''')
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[框架]]></title>
-        <id>https://lvoooo.github.io/post/kuang-jia</id>
-        <link href="https://lvoooo.github.io/post/kuang-jia">
-        </link>
-        <updated>2019-07-25T10:46:28.000Z</updated>
-        <content type="html"><![CDATA[<p>https://gin-gonic.com/docs/</p>
 ]]></content>
     </entry>
 </feed>
